@@ -242,5 +242,21 @@ namespace Caramel.Pattern.Services.Api.Controllers.v1
 
             return NoContent();
         }
+
+        /// <summary>
+        /// Busca a Imagem de Perfil do Pet em Base64.
+        /// </summary>
+        /// <param name="petId">O ID do pet a ser Deletado.</param>
+        /// <returns>Retorna a Imagem de Perfil do Pet em Base64 ou vazio.</returns>
+        [HttpGet("/pets-control/pets/{petId}/base64")]
+        [ProducesResponseType(typeof(CustomResponse<PetStatus>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetPetImageBase64(string petId)
+        {
+            var base64Image = await _service.GetImageBase64(petId);
+
+            return Ok(new { base64Image });
+        }
     }
 }

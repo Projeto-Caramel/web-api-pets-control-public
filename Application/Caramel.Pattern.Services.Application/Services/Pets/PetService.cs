@@ -182,6 +182,19 @@ namespace Caramel.Pattern.Services.Application.Services.Pets
             _unitOfWork.Pets.Delete(entity);
         }
 
+        public async Task<string> GetImageBase64(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+                throw new BusinessException("O campo ID é obrigatório.", StatusProcess.InvalidRequest, HttpStatusCode.UnprocessableEntity);
+
+            var key = $"pets/{id}/profileImage.jpg";
+
+            if (!await _bucketService.ImageExistsAsync(key))
+                return string.Empty;
+
+            return await _bucketService.GetImageAsBase64Async(key);
+        }
+
         private IEnumerable<Pet> FilterPets(IEnumerable<Pet> pets, PetFilter filter)
         {
             if (!string.IsNullOrEmpty(filter.Name))

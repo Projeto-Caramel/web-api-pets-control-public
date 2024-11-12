@@ -15,5 +15,6 @@ namespace Caramel.Pattern.Services.Domain.Services.Pets
         Task<Pet> UpdateAsync(Pet entity, string base64Image);
         Task<PetStatus> UpdateStatusAsync(string id, PetStatus status);
         Task DeleteAsync(string id);
+        Task<string> GetImageBase64(string id);
     }
 }
