@@ -71,7 +71,7 @@ namespace Caramel.Pattern.Services.Api.Controllers.v1
 
             var pets = await _service.FetchAllAsync();
 
-            var paginetedPets = ReturnPaginated<Pet>(pets, pagination);
+            var paginetedPets = ReturnPaginated(pets, pagination);
 
             var response = new CustomPetListResponse<IEnumerable<Pet>>(paginetedPets, StatusProcess.Success, pets.Count());
 

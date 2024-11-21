@@ -62,7 +62,7 @@ namespace Caramel.Pattern.Services.Application.Services.Pets
 
         public async Task<IEnumerable<Pet>> FetchAllAsync()
         {
-            var pets = await _unitOfWork.Pets.FetchAsync();
+            var pets = await _unitOfWork.Pets.FetchAsync(x => x.Info.Status == PetStatus.Available);
 
             return pets;
         }
